@@ -1,4 +1,4 @@
-FROM armhf/alpine:3.4
+FROM arm32v6/alpine:latest
 MAINTAINER docker@intrepid.de
 
 RUN apk --no-cache add privoxy bash
@@ -10,8 +10,8 @@ RUN apk --no-cache add privoxy bash
 #COPY privoxy.conf /etc/privoxy/config
 
 # make sure files are owned by privoxy user 
-#USER privoxy
-#RUN chown -R privoxy /var/log/privoxy
+USER privoxy
+RUN chown -R privoxy /var/log/privoxy
 
 # if --no-daemon is set log output is sdterr and not the logfile
 CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/config &> /var/log/privoxy/privoxy.log
