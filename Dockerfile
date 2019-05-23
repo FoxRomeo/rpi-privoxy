@@ -1,7 +1,10 @@
 FROM arm32v6/alpine:latest
 MAINTAINER docker@intrepid.de
 
-RUN apk --update --no-cache add privoxy bash
+RUN passwd -l root ; \
+    apk --update --upgrade --no-cache add \
+      privoxy \
+      bash
 
 # expose http port 
 #EXPOSE 3128
