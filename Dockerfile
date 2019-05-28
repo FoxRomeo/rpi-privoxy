@@ -16,5 +16,5 @@ RUN passwd -l root ; \
 USER privoxy
 RUN chown -R privoxy /var/log/privoxy
 
-# if --no-daemon is set log output is sdterr and not the logfile
+# if --no-daemon is set then log output is sdterr and not the logfile
 CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/config &> /var/log/privoxy/privoxy.log
