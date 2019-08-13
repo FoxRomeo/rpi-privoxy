@@ -42,8 +42,8 @@ RUN passwd -l root ; \
     make install && \
     cd / && \
     rm -rf /usr/src ; \
-    apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf && \
-    chown -R privoxy:privoxy /var/log/privoxy
+    chown -R privoxy:privoxy /var/log/privoxy ; \
+    apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf
 
 
 
