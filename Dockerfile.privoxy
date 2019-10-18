@@ -30,7 +30,8 @@ RUN passwd -l root ; \
       -G privoxy \
       privoxy && \
     passwd -l privoxy ; \
-    mkdir /usr/src && \
+    mkdir /etc/privoxy ; \
+    mkdir /usr/src ; \
     cd /usr/src && \
     wget "https://www.privoxy.org/sf-download-mirror/Sources/${PRIVOXYVERSION}%20%28stable%29/privoxy-${PRIVOXYVERSION}-stable-src.tar.gz" && \
     tar xzvf privoxy-${PRIVOXYVERSION}-stable-src.tar.gz && \
