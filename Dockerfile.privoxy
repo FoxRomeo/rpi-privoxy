@@ -40,6 +40,8 @@ RUN passwd -l root ; \
     ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --enable-compression && \
     make && \
     make install && \
+    cp match-all.action default.action default.filter user.action user.filter /etc/privoxy && \
+    cp config /etc/privoxy/privoxy.conf.example && \
     cd / && \
     rm -rf /usr/src ; \
     chown -R privoxy:privoxy /var/log/privoxy ; \
