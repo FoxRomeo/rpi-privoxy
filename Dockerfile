@@ -1,14 +1,9 @@
 FROM arm32v6/alpine:latest
 MAINTAINER docker@intrepid.de
 
-#https://www.privoxy.org/
-#<p>The most recent release is <a href="announce.txt" target="_top">3.0.28 (stable)</a>.</p>
 ENV PRIVOXYVERSION=<<PRIVOXYVERSION>>
 
 RUN passwd -l root ; \
-#    apk --update --upgrade --no-cache add \
-#      privoxy \
-#      bash
     apk --update --upgrade --no-cache add \
       bash \
       alpine-sdk \
@@ -30,8 +25,7 @@ RUN passwd -l root ; \
       -G privoxy \
       privoxy && \
     passwd -l privoxy ; \
-    mkdir /etc/privoxy ; \
-    mkdir /usr/src ; \
+    mkdir /usr/src && \
     cd /usr/src && \
     wget "https://www.privoxy.org/sf-download-mirror/Sources/${PRIVOXYVERSION}%20%28stable%29/privoxy-${PRIVOXYVERSION}-stable-src.tar.gz" && \
     tar xzvf privoxy-${PRIVOXYVERSION}-stable-src.tar.gz && \
@@ -41,21 +35,20 @@ RUN passwd -l root ; \
     ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --enable-compression && \
     make && \
     make install && \
-    cp match-all.action default.action default.filter user.action user.filter /etc/privoxy && \
-    cp config /etc/privoxy/privoxy.conf.example && \
     cd / && \
     rm -rf /usr/src ; \
     chown -R privoxy:privoxy /var/log/privoxy ; \
     apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf
 
 
-
-
 # expose http port 
 EXPOSE 3128
+
+# copy in our privoxy config file 
+#COPY privoxy.conf /etc/privoxy/config
 
 # make sure files are owned by privoxy user 
 USER privoxy
 
 # if --no-daemon is set then log output is stderr and not the logfile
-CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/privoxy.conf
+CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/config &> /var/log/privoxy/privoxy.log
