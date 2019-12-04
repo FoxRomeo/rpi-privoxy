@@ -6,7 +6,7 @@ pipeline {
 		string(name: 'OVERRIDE', defaultValue: 'latest', description: 'Version to use (leave "latest" to use latest release)', trim: true)
 	}
 	triggers {
-		cron('H H(2-7) * * 2')
+		cron('H H(2-7) * * 3')
 	}
 	options {
 		skipStagesAfterUnstable()
@@ -14,7 +14,7 @@ pipeline {
 		timestamps()
 	}
 	environment {
-		DEBUG = "1"
+//		DEBUG = "1"
 		REGISTRY = "intrepidde"
 		EMAIL_TO = 'olli.jenkins.prometheus@intrepid.de'
 		NAME = "rpi-privoxy"
