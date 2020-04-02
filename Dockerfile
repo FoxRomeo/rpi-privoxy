@@ -38,7 +38,9 @@ RUN passwd -l root ; \
     cd / && \
     rm -rf /usr/src ; \
     chown -R privoxy:privoxy /var/log/privoxy ; \
-    apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf
+    apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf ; \
+    mkdir -p /etc/privoxy ; \
+    mkdir -p /var/log/privoxy
 
 
 # expose http port 
@@ -51,4 +53,6 @@ EXPOSE 3128
 USER privoxy
 
 # if --no-daemon is set then log output is stderr and not the logfile
-CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/config &> /var/log/privoxy/privoxy.log
+#CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/config &> /var/log/privoxy/privoxy.log
+CMD ["/usr/sbin/privoxy", "--no-daemon", "/etc/privoxy/config"]
+
