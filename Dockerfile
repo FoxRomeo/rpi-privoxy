@@ -1,4 +1,5 @@
-FROM arm32v6/alpine:latest
+FROM arm32v6/alpine:3.12
+#FROM arm32v6/alpine:latest
 MAINTAINER docker@intrepid.de
 
 ENV PRIVOXYVERSION=<<PRIVOXYVERSION>>
@@ -26,6 +27,7 @@ RUN passwd -l root ; \
       privoxy && \
     passwd -l privoxy ; \
     mkdir /usr/src && \
+    mkdir /etc/privoxy ; \
     cd /usr/src && \
     wget "https://www.privoxy.org/sf-download-mirror/Sources/${PRIVOXYVERSION}%20%28stable%29/privoxy-${PRIVOXYVERSION}-stable-src.tar.gz" && \
     tar xzvf privoxy-${PRIVOXYVERSION}-stable-src.tar.gz && \
@@ -39,7 +41,6 @@ RUN passwd -l root ; \
     rm -rf /usr/src ; \
     chown -R privoxy:privoxy /var/log/privoxy ; \
     apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf ; \
-    mkdir -p /etc/privoxy ; \
     mkdir -p /var/log/privoxy
 
 
