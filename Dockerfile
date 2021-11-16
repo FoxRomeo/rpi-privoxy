@@ -53,6 +53,12 @@ EXPOSE 3128
 # make sure files are owned by privoxy user 
 USER privoxy
 
+# add health.sh script
+COPY health.sh /
+# ENV HEALTH_ENABLE=1
+ENV HEALTH_PORT=3128
+HEALTHCHECK --start-period=1m --interval=3m --timeout=10s CMD /health.sh
+
 # if --no-daemon is set then log output is stderr and not the logfile
 #CMD /usr/sbin/privoxy --no-daemon /etc/privoxy/config &> /var/log/privoxy/privoxy.log
 CMD ["/usr/sbin/privoxy", "--no-daemon", "/etc/privoxy/config"]
