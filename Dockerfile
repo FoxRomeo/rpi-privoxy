@@ -1,4 +1,4 @@
-FROM arm32v6/alpine:3.12
+FROM arm32v6/alpine:3.22
 #FROM arm32v6/alpine:latest
 MAINTAINER docker@intrepid.de
 
