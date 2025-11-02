@@ -1,6 +1,6 @@
-FROM arm32v6/alpine:3.22
-#FROM arm32v6/alpine:latest
-MAINTAINER docker@intrepid.de
+FROM alpine:3.22
+
+LABEL maintainer="docker@intrepid.de" \
 
 ENV PRIVOXYVERSION=<<PRIVOXYVERSION>>
 
