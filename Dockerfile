@@ -1,6 +1,6 @@
 FROM alpine:3.22
 
-LABEL maintainer="docker@intrepid.de" \
+LABEL maintainer="docker@intrepid.de"
 
 ENV PRIVOXYVERSION=<<PRIVOXYVERSION>>
 
