@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.23
 
 LABEL maintainer="docker@intrepid.de"
 
@@ -9,12 +9,14 @@ RUN passwd -l root ; \
       bash \
       alpine-sdk \
       autoconf \
-      pcre \
-      pcre-dev \
       zlib \
       zlib-dev \
       openssl \
-      openssl-dev && \
+      openssl-dev \
+      pcre \
+      pcre-dev \
+      pcre2 \
+      pcre2-dev && \
     addgroup \
       -S -g 1000 \
       privoxy && \
@@ -40,7 +42,7 @@ RUN passwd -l root ; \
     cd / && \
     rm -rf /usr/src ; \
     chown -R privoxy:privoxy /var/log/privoxy ; \
-    apk del alpine-sdk zlib-dev openssl-dev pcre-dev autoconf ; \
+    apk del alpine-sdk zlib-dev openssl-dev pcre-dev pcre2-dev autoconf ; \
     mkdir -p /var/log/privoxy
 
 
